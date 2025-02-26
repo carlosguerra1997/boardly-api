@@ -2,6 +2,7 @@
   "compilerOptions": {
     "module": "Node16",
     "moduleResolution": "Node16",
+    "baseUrl": ".",
     "target": "ES2022",
     "outDir": "./dist",
     "rootDir": "./src",
@@ -12,7 +13,11 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false
+    "noEmit": false,
+    "paths": {
+      "@/common/*": ["src/common/*"],
+      "@/modules/*": ["src/modules/*"]
+    }
   },
   "include": [
     "src/**/*.ts"
