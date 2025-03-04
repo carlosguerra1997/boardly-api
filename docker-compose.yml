@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: boardly-api-container
+    build:
+      context: .
+      dockerfile: docker/api/dev/Dockerfile
+    volumes:
+      - ./:/srv/app/api:rw,cached
+    ports:
+      - "3000:3000"
+    networks:
+      boardly:
+
+  database:
+    container_name: boardly-api-database
+    image: postgres:${DATABASE_VERSION}-alpine
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "${DATABASE_PORT}:5432"
+    volumes:
+      - ../data/boardly/database/data:/var/lib/postgresql/data:rw
+    networks:
+      boardly:
+
+  redis:
+    container_name: boardly-api-redis
+    image: redis:latest
+    ports:
+      - "${REDIS_PORT}:6379"
+    volumes:
+      - boardly_redis:/data
+    networks:
+      boardly:
+
+  redisinsight:
+    container_name: boardly-api-redisinsight
+    image: redislabs/redisinsight:latest
+    ports:
+      - "8001:5540"
+    networks:
+      - boardly
+
+  pgadmin4:
+    container_name: boardly-pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "3333:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks: 
+      boardly:
+
+networks:
+  boardly:
+
+volumes:
+  pgadmin_data:
+  boardly_redis:
