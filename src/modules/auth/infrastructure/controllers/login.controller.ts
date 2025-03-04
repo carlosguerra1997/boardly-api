@@ -1,8 +1,8 @@
-import { Controller, Post, Body, InternalServerErrorException } from '@nestjs/common'
+import { Controller, Post, Body, InternalServerErrorException, BadRequestException } from '@nestjs/common'
 
-import { type LoginPayload } from '@/modules/auth/adapters/dtos/login-payload'
+import { BadRequestError } from '@/common/domain/identity/exception/bad-request-error'
 
-import { loginPayloadSchema } from '@/modules/auth/adapters/dtos/login-payload-schema'
+import { type LoginPayload, loginPayloadSchema } from '@/modules/auth/adapters/dtos/login-payload'
 import { ValidateWith } from '@/common/infrastructure/decorators/validate-with.decorator'
 
 import { LoginUseCase } from '@/modules/auth/application/login/login-use-case'
@@ -20,6 +20,11 @@ export class LoginController {
       const tokens = await this.login.dispatch(body)
       return { tokens }
     } catch (error) {
+      if (error instanceof BadRequestError) {
+        throw new BadRequestException(error.message)
+      }
+
+      console.log(error)
       throw new InternalServerErrorException()
     }
   }
