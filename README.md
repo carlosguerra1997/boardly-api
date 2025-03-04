@@ -1,4 +1,9 @@
 # Proximos pasos:
+  ## Validaciones
+    # Validar variables de entorno.
+
+  ## Añadir Responses a los casos de uso
+
   ## Empezar a montar la autenticación.
     # Posibilidad de crear una cuenta (envio de emails con verificación).
     # Posibilidad de Loguearse con Google o Github.
