@@ -9,7 +9,7 @@ import { Hasher } from '@/common/domain/identity/hasher.interface'
 import { IdGenerator } from '@/common/domain/identity/id-generator.interface'
 
 import { ArgonHasherService } from '@/modules/auth/infrastructure/services/hasher/argon-hasher.service'
-import { ArgonIdGenerator } from '@/common/infrastructure/services/id-generator/argon-id-generator.service'
+import { CryptoIdGenerator } from '@/common/infrastructure/services/id-generator/crypto-id-generator.service'
 
 @Module({
   imports: [
@@ -28,7 +28,7 @@ import { ArgonIdGenerator } from '@/common/infrastructure/services/id-generator/
   ],
   providers: [
     { provide: Hasher, useClass: ArgonHasherService },
-    { provide: IdGenerator, useClass: ArgonIdGenerator }
+    { provide: IdGenerator, useClass: CryptoIdGenerator }
   ],
   exports: [
     ConfigModule,
