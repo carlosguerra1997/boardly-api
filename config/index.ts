@@ -9,6 +9,6 @@ export default () => {
     default:
       config = getDevConfig()
   }
-
+  
   return config
 }
