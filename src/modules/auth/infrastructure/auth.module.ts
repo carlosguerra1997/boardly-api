@@ -1,18 +1,38 @@
 import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
+import { TypeOrmModule } from '@nestjs/typeorm'
+
+import { CommonModule } from '@/common/common.module'
+import { UserModule } from '@/modules/user/infrastructure/user.module'
 
 import { LoginController } from '@/modules/auth/infrastructure/controllers/login.controller'
+import { RegisterController } from '@/modules/auth/infrastructure/controllers/register.controller'
 
+import { JwtService } from '@/modules/auth/infrastructure/services/jwt/jwt-token-generator.service'
 import { LoginUseCase } from '@/modules/auth/application/login/login-use-case'
+import { RegisterUseCase } from '@/modules/auth/application/register/register-use-case'
+import { TokenGenerator } from '@/modules/auth/ports/token-generator.interface'
+import { UserSchema } from '@/modules/user/infrastructure/persistence/typeorm/mapping/user-schema'
 
-import { JwtService } from '@/modules/auth/infrastructure/services/jwt/jwt.service'
+import { CacheStored } from '@/common/domain/cache/cache-stored'
+import { RedisClient } from '@/common/infrastructure/services/redis/redis-client.service'
 
 @Module({
-  controllers:  [LoginController],
-  providers: [
-    LoginUseCase,
-    JwtService
+  imports: [
+    TypeOrmModule.forFeature([ UserSchema ]),
+    CommonModule,
+    JwtModule,
+    UserModule
   ],
-  imports: [ JwtModule ]
+  controllers:  [
+    LoginController,
+    RegisterController
+  ],
+  providers: [    
+    LoginUseCase,
+    RegisterUseCase,
+    { provide: TokenGenerator, useClass: JwtService },
+    { provide: CacheStored, useClass: RedisClient }
+  ]
 })
 export class AuthModule {}
