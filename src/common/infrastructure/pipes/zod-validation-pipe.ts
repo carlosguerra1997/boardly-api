@@ -13,8 +13,15 @@ export class ZodValidationPipe implements PipeTransform {
     } catch (error) {
       if (error instanceof ZodError) {
         throw new BadRequestException({
-          message: 'Message',
-          error: 'Error'
+          message: 'There was an error validating payload data',
+          errors: error.errors.map(error => {
+            const { path, message } = error
+
+            return {
+              field: path[0],
+              error: message
+            }
+          })
         })
       }
       
