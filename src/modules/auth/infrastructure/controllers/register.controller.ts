@@ -1,13 +1,14 @@
 import { BadRequestException, Body, Controller, InternalServerErrorException, Post } from '@nestjs/common'
 
 import { BadRequestError } from '@/common/domain/identity/exception/bad-request-error'
-import { type RegisterPayload, registerPayloadSchema } from '@/modules/auth/adapters/dtos/register-payload'
-import { ValidateWith } from '@/common/infrastructure/decorators/validate-with.decorator'
-
-import { RegisterUseCase } from '@/modules/auth/application/register/register-use-case'
 import { Result } from '@/common/domain/identity/result'
 
-@Controller('auth')
+import { ValidateWith } from '@/common/infrastructure/decorators/validate-with.decorator'
+
+import { type RegisterPayload, registerPayloadSchema } from '@/modules/auth/adapters/dtos/register-payload'
+import { RegisterUseCase } from '@/modules/auth/application/register/register-use-case'
+
+@Controller()
 export class RegisterController {
   constructor(
 		private register: RegisterUseCase
