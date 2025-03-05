@@ -5,8 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import config from '@/config/index'
 import { Configuration } from '@/config/Configuration'
 
-import { Hasher } from '@/common/domain/identity/hasher.interface'
-import { IdGenerator } from '@/common/domain/identity/id-generator.interface'
+import { Hasher } from '@/common/domain/identity/hasher'
+import { IdGenerator } from '@/common/domain/identity/id-generator'
 
 import { ArgonHasherService } from '@/modules/auth/infrastructure/services/hasher/argon-hasher.service'
 import { CryptoIdGenerator } from '@/common/infrastructure/services/id-generator/crypto-id-generator.service'

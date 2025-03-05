@@ -11,11 +11,12 @@ import { RegisterController } from '@/modules/auth/infrastructure/controllers/re
 import { JwtService } from '@/modules/auth/infrastructure/services/jwt/jwt-token-generator.service'
 import { LoginUseCase } from '@/modules/auth/application/login/login-use-case'
 import { RegisterUseCase } from '@/modules/auth/application/register/register-use-case'
-import { TokenGenerator } from '@/modules/auth/ports/token-generator.interface'
+import { TokenManager } from '@/modules/auth/infrastructure/services/jwt/jwt-token-manager.service'
 import { UserSchema } from '@/modules/user/infrastructure/persistence/typeorm/mapping/user-schema'
 
 import { CacheStored } from '@/common/domain/cache/cache-stored'
 import { RedisClient } from '@/common/infrastructure/services/redis/redis-client.service'
+import { TokenGenerator } from '@/common/domain/identity/token-generator'
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { RedisClient } from '@/common/infrastructure/services/redis/redis-client
   providers: [    
     LoginUseCase,
     RegisterUseCase,
+    TokenManager,
     { provide: TokenGenerator, useClass: JwtService },
     { provide: CacheStored, useClass: RedisClient }
   ]
