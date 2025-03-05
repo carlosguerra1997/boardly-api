@@ -2,24 +2,24 @@ import { Inject, Injectable } from '@nestjs/common'
 
 import { RegisterPayload } from '@/modules/auth/adapters/dtos/register-payload'
 
-import { IdGenerator } from '@/common/domain/identity/id-generator.interface'
-import { TokenGenerator } from '@/modules/auth/ports/token-generator.interface'
-import { Hasher } from '@/common/domain/identity/hasher.interface'
+import { CacheStored } from '@/common/domain/cache/cache-stored'
+import { IdGenerator } from '@/common/domain/identity/id-generator'
+import { TokenGenerator } from '@/common/domain/identity/token-generator'
+import { Hasher } from '@/common/domain/identity/hasher'
 
 import { UserRepository } from '@/modules/user/domain/user-repository'
 
 import { UserRequest } from '@/modules/user/application/request/user-request'
-import { CacheStored } from '@/common/domain/cache/cache-stored'
 
 import { UserAlreadyExistException } from '@/modules/user/application/exceptions/user-already-exist-exception'
 
 @Injectable()
 export class RegisterUseCase {
   constructor(
+    @Inject(CacheStored) private cacheRepository: CacheStored,
     @Inject(Hasher) private hasher: Hasher,
     @Inject(IdGenerator) private idGenerator: IdGenerator,
     @Inject(TokenGenerator) private jwtService: TokenGenerator,
-    @Inject(CacheStored) private cacheRepository: CacheStored,
     @Inject(UserRepository) private userRepo: UserRepository
   ) {}
 
