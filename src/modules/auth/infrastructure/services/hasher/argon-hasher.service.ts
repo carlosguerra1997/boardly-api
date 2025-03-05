@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 
 import { hash, verify } from 'argon2'
 
-import { Hasher } from '@/common/domain/identity/hasher.interface'
+import { Hasher } from '@/common/domain/identity/hasher'
 
 import { PasswordHashingException } from '@/modules/auth/application/exceptions/password-hashing-exception'
 import { PasswordVerifyingException } from '@/modules/auth/application/exceptions/password-verifying-exception'

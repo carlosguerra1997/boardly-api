@@ -4,7 +4,7 @@ import { JwtService as JwtLibService } from '@nestjs/jwt'
 
 import { Token } from '@/config/Configuration'
 
-import { TokenGenerator } from '@/modules/auth/ports/token-generator.interface'
+import { TokenGenerator } from '@/common/domain/identity/token-generator'
 
 import { UnauthorizedException } from '@/modules/auth/application/exceptions/unauthorized-exception'
 
