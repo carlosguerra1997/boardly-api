@@ -6,8 +6,6 @@ import { Token } from '@/config/Configuration'
 
 import { TokenGenerator } from '@/common/domain/identity/token-generator'
 
-import { UnauthorizedException } from '@/modules/auth/application/exceptions/unauthorized-exception'
-
 @Injectable()
 export class JwtService implements TokenGenerator {
   constructor(
@@ -40,14 +38,5 @@ export class JwtService implements TokenGenerator {
     }
 
     return this.jwtService.sign({ userId }, refreshTokenConfig)
-  }
-
-  async verifyToken(token: string, type: 'access' | 'refresh'): Promise<any> {
-    try {
-      const tokenSecret = this.configService.get<string>(`auth.${type}Token.secret`)
-      return this.jwtService.verify(token, { secret: tokenSecret})
-    } catch (error) {
-      throw new UnauthorizedException()
-    }
   }
 }
