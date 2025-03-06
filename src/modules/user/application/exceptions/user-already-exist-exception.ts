@@ -3,6 +3,6 @@ import { BadRequestError } from '@/common/domain/identity/exception/bad-request-
 export class UserAlreadyExistException extends BadRequestError {
   constructor(message: string = 'Username or email not valid.') {
     super(message)
-    this.name = 'BadRequestException'
+    this.name = 'UserAlreadyExistException'
   }
 }
