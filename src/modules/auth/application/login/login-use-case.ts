@@ -6,7 +6,7 @@ import { CacheStored } from '@/common/domain/cache/cache-stored'
 
 import { InvalidCredentialsException } from '@/modules/auth/application/exceptions/invalid-credentials-exception'
 import { JwtService } from '@/modules/auth/infrastructure/services/jwt/jwt-token-generator.service'
-import { LoginPayload } from '@/modules/auth/adapters/dtos/login-payload'
+import { LoginPayload } from '@/modules/auth/application/login/login-payload'
 import { TokenGenerator } from '@/common/domain/identity/token-generator'
 
 import { User } from '@/modules/user/domain/user'

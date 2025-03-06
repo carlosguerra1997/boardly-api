@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common'
 
-import { RegisterPayload } from '@/modules/auth/adapters/dtos/register-payload'
+import { RegisterPayload } from '@/modules/auth/application/register/register-payload'
 
 import { CacheStored } from '@/common/domain/cache/cache-stored'
 import { IdGenerator } from '@/common/domain/identity/id-generator'
