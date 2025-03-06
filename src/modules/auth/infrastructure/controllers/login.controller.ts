@@ -3,7 +3,7 @@ import { Controller, Post, Body, InternalServerErrorException, BadRequestExcepti
 import { BadRequestError } from '@/common/domain/identity/exception/bad-request-error'
 import { Result } from '@/common/domain/identity/result'
 
-import { type LoginPayload, loginPayloadSchema } from '@/modules/auth/adapters/dtos/login-payload'
+import { type LoginPayload, loginPayloadSchema } from '@/modules/auth/application/login/login-payload'
 import { ValidateWith } from '@/common/infrastructure/decorators/validate-with.decorator'
 
 import { LoginUseCase } from '@/modules/auth/application/login/login-use-case'

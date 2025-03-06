@@ -5,7 +5,7 @@ import { Result } from '@/common/domain/identity/result'
 
 import { ValidateWith } from '@/common/infrastructure/decorators/validate-with.decorator'
 
-import { type RegisterPayload, registerPayloadSchema } from '@/modules/auth/adapters/dtos/register-payload'
+import { type RegisterPayload, registerPayloadSchema } from '@/modules/auth/application/register/register-payload'
 import { RegisterUseCase } from '@/modules/auth/application/register/register-use-case'
 
 @Controller()
