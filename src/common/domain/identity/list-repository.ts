@@ -1,6 +1,6 @@
 import { StoredRepository } from '@/common/domain/identity/stored-repository'
 
 export interface ListRepository<T> extends StoredRepository<T> {
-  obtainById(id: string): Promise<T>
+  obtainById(id: string): Promise<T | null>
   obtainByQuery(query?: any): Promise<T[]>
 }
