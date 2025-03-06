@@ -10,12 +10,19 @@ import { PostgresUserRepository } from '@/modules/user/infrastructure/persistenc
 import { UserRepository } from '@/modules/user/domain/user-repository'
 import { UserSchema } from '@/modules/user/infrastructure/persistence/typeorm/mapping/user-schema'
 
+import { UserReadController } from '@/modules/user/infrastructure/controllers/v1/user-read'
+import { UserRead } from '@/modules/user/application/reader/user-read'
+
 @Module({
   imports: [
     CommonModule,
     TypeOrmModule.forFeature([ UserSchema ])
   ],
+  controllers: [
+    UserReadController
+  ],
   providers: [
+    UserRead,
     { provide: IUserAssembler, useClass: UserAssembler },
     { provide: UserRepository, useClass: PostgresUserRepository }
   ],
