@@ -1,5 +1,7 @@
 import { Configuration } from '@/config/Configuration'
+import { loadEnvFile } from 'process'
 
+loadEnvFile()
 
 const {
   ACCESS_TOKEN_SECRET,
