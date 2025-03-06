@@ -1,4 +1,4 @@
-import { ObjectLiteral, Repository } from 'typeorm'
+import { FindOptionsWhere, ObjectLiteral, Repository } from 'typeorm'
 
 import { Assembler } from '@/common/domain/identity/assembler'
 import { ListRepository } from '@/common/domain/identity/list-repository'
@@ -9,9 +9,16 @@ export abstract class PostgresRepository<T, U extends ObjectLiteral> implements 
     protected readonly repo: Repository<U>
   ) {}
 
-  async obtainById(id: string): Promise<T> {
-    const element: T = null as any
-    return element
+  async obtainById(id: string): Promise<T | null> {
+    const where: FindOptionsWhere<U> = { id } as any
+    const item = await this.repo.findOne({ where })
+
+    if (null === item) {
+      return null
+    }
+
+    const entity = this.assembler.toEntity(item)
+    return entity
   }
 
   async obtainByQuery(query?: any): Promise<T[]> {
