@@ -10,7 +10,7 @@ import { PostgresUserRepository } from '@/modules/user/infrastructure/persistenc
 import { UserRepository } from '@/modules/user/domain/user-repository'
 import { UserSchema } from '@/modules/user/infrastructure/persistence/typeorm/mapping/user-schema'
 
-import { UserReadController } from '@/modules/user/infrastructure/controllers/v1/user-read'
+import { UserReadController } from '@/modules/user/infrastructure/controllers/v1/user-read.controller'
 import { UserRead } from '@/modules/user/application/reader/user-read'
 
 @Module({
