@@ -8,10 +8,11 @@ import { UserModule } from '@/modules/user/infrastructure/user.module'
 import { LoginController } from '@/modules/auth/infrastructure/controllers/login.controller'
 import { RegisterController } from '@/modules/auth/infrastructure/controllers/register.controller'
 
+import { JwtAuthGuard } from '@/modules/auth/infrastructure/guard/auth.guard'
 import { JwtService } from '@/modules/auth/infrastructure/services/jwt/jwt-token-generator.service'
+import { JwtStrategy } from '@/modules/auth/infrastructure/strategies/jwt.strategy'
 import { LoginUseCase } from '@/modules/auth/application/login/login-use-case'
 import { RegisterUseCase } from '@/modules/auth/application/register/register-use-case'
-import { TokenManager } from '@/modules/auth/infrastructure/services/jwt/jwt-token-manager.service'
 import { UserSchema } from '@/modules/user/infrastructure/persistence/typeorm/mapping/user-schema'
 
 import { CacheStored } from '@/common/domain/cache/cache-stored'
@@ -29,10 +30,11 @@ import { TokenGenerator } from '@/common/domain/identity/token-generator'
     LoginController,
     RegisterController
   ],
-  providers: [    
+  providers: [
     LoginUseCase,
     RegisterUseCase,
-    TokenManager,
+    JwtAuthGuard,
+    JwtStrategy,
     { provide: TokenGenerator, useClass: JwtService },
     { provide: CacheStored, useClass: RedisClient }
   ]
