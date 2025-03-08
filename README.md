@@ -2,13 +2,16 @@
   ## Validaciones
     # Validar variables de entorno.
 
+  # Instalar Linter
+  # Instalar Husky
+
+  # Permitir X intentos de login y bloquear X segundos (evitar fuerza bruta).
   # Devolver respuestas de los controladores pasando por la capa de presentación.
-  # Endpoint refresh para renovar el refreshToken.
 
   ## Autenticación pendientes:
-    # Middleware para validar rutas.
-    # Devolver el refreshToker en una cookie:
-      # httpOnly: para protegerla de ataques XSS.
-      # SameSite=Strict | SameSite=Lax para evitar ataques CSRF.
+    # Endpoint /refresh para renovar el refreshToken.
+    # Devolver el refreshToken en una cookie:
+      # httpOnly: evitar posibles ataques XSS.
+      # SameSite=Strict | SameSite=Lax evitar posibles ataques CSRF. (Secure).
     # Añadir blacklist de refresh tokens a redis (blacklistear el refreshToken si el usuario cierra sesión).
-    # Posibilidad de Loguearse con Google o Github.
+    # Login con Google o Github.
