@@ -19,7 +19,7 @@ export class LoginController {
   async invoke(@Body() body: LoginPayload) {
     try {
       const { accessToken, refreshToken } = await this.login.dispatch(body)
-      return Result.success({ accessToken, refreshToken }) 
+      return Result.success({ accessToken, refreshToken })
     } catch (error) {
       if (error instanceof BadRequestError) {
         throw new BadRequestException(error.message)
