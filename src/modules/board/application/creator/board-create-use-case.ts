@@ -6,5 +6,7 @@ import { type BoardCreatePayload } from '@/modules/board/application/creator/boa
 export class BoardCreateUseCase {
   constructor() {}
 
-  async dispatch(payload: BoardCreatePayload): Promise<any> {}
+  async dispatch(payload: BoardCreatePayload): Promise<any> {
+    return 
+  }
 }
