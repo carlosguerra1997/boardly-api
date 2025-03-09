@@ -1,6 +1,6 @@
 export interface CacheStored {
   set(key: string, value: any, ttl?: number): Promise<void>
-  get(key: string): Promise<any | null>
+  get(key: string): Promise<string | null>
   del(key: string): Promise<void>
 }
 
