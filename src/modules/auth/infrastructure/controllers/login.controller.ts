@@ -16,7 +16,7 @@ export class LoginController {
 
   @Post('login')
   @ValidateWith(loginPayloadSchema)
-  async invoke(@Body() body: LoginPayload) {
+  async invoke(@Body() body: LoginPayload): Promise<Result> {
     try {
       const { accessToken, refreshToken } = await this.login.dispatch(body)
       return Result.success({ accessToken, refreshToken })

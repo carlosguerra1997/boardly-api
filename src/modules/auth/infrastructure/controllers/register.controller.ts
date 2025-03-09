@@ -16,7 +16,7 @@ export class RegisterController {
 
   @Post('register')
 	@ValidateWith(registerPayloadSchema)
-	async invoke(@Body() body: RegisterPayload) {
+	async invoke(@Body() body: RegisterPayload): Promise<Result> {
 		try {
 			const { accessToken, refreshToken } = await this.register.dispatch(body)
 			return Result.success({ accessToken, refreshToken })
