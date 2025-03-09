@@ -20,6 +20,10 @@ export class JwtService implements TokenGenerator {
     return { accessToken, refreshToken }
   }
 
+  async refresh(userId: string): Promise<string> {
+    return this.generateAccessToken(userId)
+  }
+
   private async generateAccessToken(userId: string): Promise<string> {
     const accessTokenConfig = this.configService.get<Token>('auth.accessToken')
 
