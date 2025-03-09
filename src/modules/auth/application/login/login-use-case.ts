@@ -28,7 +28,8 @@ export class LoginUseCase {
     await this.checkIsValidPassword(user, password)
 
     const { accessToken, refreshToken } = await this.jwtService.generate(user.getId())
-    await this.cacheRepository.set(`${user.getId()}:refreshToken`, refreshToken)
+    const refreshHashed = await this.hasher.hash(refreshToken)
+    await this.cacheRepository.set(`${user.getId()}:refreshToken`, refreshHashed)
 
     return { accessToken, refreshToken }
   }
