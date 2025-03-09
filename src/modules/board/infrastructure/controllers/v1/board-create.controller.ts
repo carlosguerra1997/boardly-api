@@ -5,6 +5,7 @@ import { ValidateWith } from '@/common/infrastructure/decorators/validate-with.d
 
 import { BoardCreateUseCase } from '@/modules/board/application/creator/board-create-use-case'
 import { type BoardCreatePayload, boardPayloadValidationSchema } from '@/modules/board/application/creator/board-create-payload'
+import { BoardReadView } from '@/modules/board/presentation/board-read-view'
 
 
 @Controller('v1')
@@ -18,6 +19,8 @@ export class BoardCreateController {
   async invoke(@Body() body: BoardCreatePayload) {
     try {
       const board = await this.creator.dispatch(body)
+      const result = new BoardReadView(board)
+      return result
     } catch (error) {
       if (error instanceof NotFoundError) {
         throw new NotFoundException()
