@@ -1,12 +1,12 @@
 import { EntitySchema } from 'typeorm'
 
-import { UserSchemaInterface } from '@/modules/user/infrastructure/persistence/typeorm/mapping/user-schema'
+import { BoardMemberSchemaInterface } from '@/modules/board-member/infrastructure/persistence/typeorm/mapping/board-member-schema'
 
 export interface BoardSchemaInterface{
   id: string
   name: string
   description: string
-  user: UserSchemaInterface
+  members: BoardMemberSchemaInterface
   createdAt: number
   updatedAt: number
 }
@@ -37,13 +37,11 @@ export const BoardSchema = new EntitySchema<BoardSchemaInterface>({
       type: 'bigint'
     }
   },
-  relations: {
-    user: {
-      type: 'many-to-one',
-      target: 'User',
-      joinColumn: {
-        name: 'user_id'
-      }
+  /* relations: {
+    members: {
+      type: 'one-to-many',
+      target: 'BoardMember',
+      inverseSide: 'board'
     }
-  }
+  } */
 })

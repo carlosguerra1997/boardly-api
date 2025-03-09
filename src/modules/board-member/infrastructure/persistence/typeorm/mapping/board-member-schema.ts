@@ -9,6 +9,7 @@ export interface BoardMemberSchemaInterface {
   user: UserSchemaInterface
   role: 'owner' | 'editor' | 'viewer'
   active: boolean
+  isOwner: boolean
   createdAt: number
   updatedAt: number
 }
@@ -29,6 +30,11 @@ export const BoardMemberSchema = new EntitySchema<BoardMemberSchemaInterface>({
     active: {
       type: Boolean,
       default: true
+    },
+    isOwner: {
+      name: 'is_owner',
+      type: Boolean,
+      default: false
     },
     createdAt: {
       name: 'created_at',
