@@ -3,7 +3,7 @@ import { Controller, Get, InternalServerErrorException, NotFoundException, Param
 import { NotFoundError } from '@/common/domain/identity/exception/not-found-error'
 import { Result } from '@/common/domain/identity/result'
 
-import { JwtAuthGuard } from '@/modules/auth/infrastructure/guard/auth.guard'
+import { JwtAccessTokenGuard } from '@/modules/auth/infrastructure/guard/jwt-access-token.guard'
 
 import { UserRead } from '@/modules/user/application/reader/user-read'
 import { UserReadView } from '@/modules/user/presentation/v1/user-read-view'
@@ -15,7 +15,7 @@ export class UserReadController {
   ) {}
 
   @Get(':id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAccessTokenGuard)
   async invoke(@Param('id') id: string): Promise<Result> {
     try {
       const user = await this.reader.dispatch(id)
