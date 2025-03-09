@@ -30,7 +30,7 @@ const dbConfig: DataSourceOptions = {
   migrationsRun: Boolean(process.env.DATABASE_MIGRATIONS_RUN),
   logging: false,
   migrations: ['dist/migrations/**/*{.ts,.js}'],
-  entities: [UserSchema]
+  entities: entities
 }
 
 const dataSource = new DataSource(dbConfig)
