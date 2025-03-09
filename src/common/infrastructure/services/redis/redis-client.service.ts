@@ -24,8 +24,18 @@ export class RedisClient implements CacheStored {
     }
   }
   
-  async get(key: string): Promise<any | null> {
-    
+  async get(key: string): Promise<string | null> {
+    try {
+      const item = await this.client.get(key)
+
+      if (!item) {
+        return null
+      }
+
+      return item
+    } catch (error: any) {
+      throw new RedisClientException(error.message)
+    }
   }
 
   async del(key: string): Promise<void> {
