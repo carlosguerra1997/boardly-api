@@ -6,13 +6,19 @@ import { CommonModule } from '@/common/common.module'
 import { UserModule } from '@/modules/user/infrastructure/user.module'
 
 import { LoginController } from '@/modules/auth/infrastructure/controllers/login.controller'
+import { RefreshController } from '@/modules/auth/infrastructure/controllers/refresh.controller'
 import { RegisterController } from '@/modules/auth/infrastructure/controllers/register.controller'
 
-import { JwtAuthGuard } from '@/modules/auth/infrastructure/guard/auth.guard'
+import { JwtAccessTokenGuard } from '@/modules/auth/infrastructure/guard/jwt-access-token.guard'
+import { JwtRefreshTokenGuard } from '@/modules/auth/infrastructure/guard/jwt-refresh-token.guard'
 import { JwtService } from '@/modules/auth/infrastructure/services/jwt/jwt-token-generator.service'
-import { JwtStrategy } from '@/modules/auth/infrastructure/strategies/jwt.strategy'
+import { JwtAccessStrategy } from '@/modules/auth/infrastructure/strategies/jwt-access.strategy'
+import { JwtRefreshStrategy } from '@/modules/auth/infrastructure/strategies/jwt-refresh.strategy'
+
 import { LoginUseCase } from '@/modules/auth/application/login/login-use-case'
+import { RefreshUserCase } from '@/modules/auth/application/refresh/refresh-use-case'
 import { RegisterUseCase } from '@/modules/auth/application/register/register-use-case'
+
 import { UserSchema } from '@/modules/user/infrastructure/persistence/typeorm/mapping/user-schema'
 
 import { CacheStored } from '@/common/domain/cache/cache-stored'
@@ -28,13 +34,17 @@ import { TokenGenerator } from '@/common/domain/identity/token-generator'
   ],
   controllers:  [
     LoginController,
+    RefreshController,
     RegisterController
   ],
   providers: [
     LoginUseCase,
+    RefreshUserCase,
     RegisterUseCase,
-    JwtAuthGuard,
-    JwtStrategy,
+    JwtAccessTokenGuard,
+    JwtRefreshTokenGuard,
+    JwtAccessStrategy,
+    JwtRefreshStrategy,
     { provide: TokenGenerator, useClass: JwtService },
     { provide: CacheStored, useClass: RedisClient }
   ]
