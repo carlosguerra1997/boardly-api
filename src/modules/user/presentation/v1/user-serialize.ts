@@ -1,4 +1,4 @@
-import { User } from '@/modules/user/domain/user'
+import { UserResponse } from '@/modules/user/application/response/user-response'
 
 interface UserItemReadView {
   id: string
@@ -6,10 +6,10 @@ interface UserItemReadView {
   email: string
 }
 
-export const userSerialize = (item: User): UserItemReadView =>  {
+export const userSerialize = (item: UserResponse): UserItemReadView =>  {
   return {
-    id: item.getId(),
-    username: item.getUsername(),
-    email: item.getEmail()
+    id: item.id,
+    username: item.username,
+    email: item.email
   }
 }
