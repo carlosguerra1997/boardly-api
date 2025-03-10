@@ -6,6 +6,7 @@ export interface BoardSchemaInterface{
   id: string
   name: string
   description: string
+  status: string
   members: BoardMemberSchemaInterface
   createdAt: number
   updatedAt: number
@@ -27,6 +28,10 @@ export const BoardSchema = new EntitySchema<BoardSchemaInterface>({
     description: {
       type: String,
       length: 255
+    },
+    status: {
+      type: String,
+      length: 50,
     },
     createdAt: {
       name: 'created_at',
