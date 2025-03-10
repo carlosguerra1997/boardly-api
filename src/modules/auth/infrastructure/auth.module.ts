@@ -22,8 +22,11 @@ import { RegisterUseCase } from '@/modules/auth/application/register/register-us
 import { UserSchema } from '@/modules/user/infrastructure/persistence/typeorm/mapping/user-schema'
 
 import { CacheStored } from '@/common/domain/cache/cache-stored'
-import { RedisClient } from '@/common/infrastructure/services/redis/redis-client.service'
+import { Hasher } from '@/common/domain/identity/hasher'
 import { TokenGenerator } from '@/common/domain/identity/token-generator'
+
+import { ArgonHasherService } from '@/modules/auth/infrastructure/services/hasher/argon-hasher.service'
+import { RedisClient } from '@/common/infrastructure/services/redis/redis-client.service'
 
 @Module({
   imports: [
@@ -45,8 +48,9 @@ import { TokenGenerator } from '@/common/domain/identity/token-generator'
     JwtRefreshTokenGuard,
     JwtAccessStrategy,
     JwtRefreshStrategy,
+    { provide: CacheStored, useClass: RedisClient },
+    { provide: Hasher, useClass: ArgonHasherService },    
     { provide: TokenGenerator, useClass: JwtService },
-    { provide: CacheStored, useClass: RedisClient }
   ]
 })
 export class AuthModule {}

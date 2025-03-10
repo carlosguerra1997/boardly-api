@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthModule } from '@/modules/auth/infrastructure/auth.module';
+import { CommonModule } from '@/common/common.module'
 
 import { BoardCreateController } from '@/modules/board/infrastructure/controllers/v1/board-create.controller'
 import { BoardCreateUseCase } from '@/modules/board/application/creator/board-create-use-case'
@@ -11,6 +12,7 @@ import { BoardSchema } from '@/modules/board/infrastructure/persistence/typeorm/
 @Module({
   imports: [
     AuthModule,
+    CommonModule,
     TypeOrmModule.forFeature([ BoardSchema ])
   ],
   controllers: [
