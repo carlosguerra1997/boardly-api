@@ -3,8 +3,9 @@ import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
 import { ExtractJwt, Strategy } from 'passport-jwt'
 
-import { User } from '@/modules/user/domain/user'
 import { UserRepository } from '@/modules/user/domain/user-repository'
+
+import { UserResponse } from '@/modules/user/application/response/user-response'
 
 import { PassportValidatePayload } from '@/modules/auth/infrastructure/strategies/jwt-payload'
 
@@ -23,13 +24,17 @@ export class JwtAccessStrategy extends PassportStrategy(Strategy, 'jwt-access') 
     })
   }
 
-  async validate(payload: PassportValidatePayload): Promise<User> {
+  async validate(payload: PassportValidatePayload): Promise<UserResponse> {
     const user = await this.userRepo.obtainById(payload.userId)
 
     if (!user) {
       throw new UnauthorizedException()
     }
 
-    return user
+    return {
+      id: user.getId(),
+      username: user.getUsername(),
+      email: user.getEmail()
+    }
   }
 }
