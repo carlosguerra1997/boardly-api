@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 
 import { CommonModule } from '@/common/common.module'
 
-import { UserAssembler } from '@/modules/user/infrastructure/persistence/typeorm/assembler/UserAssembler'
+import { UserAssembler } from '@/modules/user/infrastructure/persistence/typeorm/assembler/user-assembler'
 import { UserAssembler as IUserAssembler } from '@/modules/user/domain/user-assembler'
 
 import { PostgresUserRepository } from '@/modules/user/infrastructure/persistence/typeorm/postgres-user-repository'
