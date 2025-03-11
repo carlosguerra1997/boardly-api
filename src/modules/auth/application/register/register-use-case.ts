@@ -31,7 +31,9 @@ export class RegisterUseCase {
     const id = this.idGenerator.generate()
     const hashedPassword = await this.hasher.hash(password)
 
-    const user = UserRequest.create(id, username, email, hashedPassword)
+    const request = new UserRequest(id, username, email, hashedPassword)
+    const user = request.make()
+
     await this.userRepo.save(user)
 
     const { accessToken, refreshToken } = await this.jwtService.generate(id)
