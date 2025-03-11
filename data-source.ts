@@ -1,4 +1,3 @@
-import { UserSchema } from '@/modules/user/infrastructure/persistence/typeorm/mapping/user-schema'
 import * as dotenv from 'dotenv'
 import * as glob from 'glob'
 import { DataSource, DataSourceOptions, EntitySchema } from 'typeorm'
