@@ -16,10 +16,10 @@ export class BoardCreateUseCase {
     payload: BoardCreatePayload, 
     userId: string
   ): Promise<BoardResponse> {
-    const { description, name } = payload
-
     const id = await this.idGenerator.generate()
-    const board = BoardRequest.create(id, name, description)
+
+    const request = new BoardRequest(id, payload)
+    const board = request.make()
 
     // Save board to database
 
