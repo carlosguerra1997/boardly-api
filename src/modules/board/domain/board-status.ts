@@ -1,24 +1,24 @@
-export enum BoardStatusEnum {
-  ACTIVE = 'active',
-  ARCHIVED = 'archived'
-}
+export type BoardStatusType = 'active' | 'archived'
 
 export class BoardStatus {
-  private status: BoardStatusEnum
+  private static readonly ACTIVE_STATUS = 'active'
+  private static readonly ARCHIVED_STATUS = 'archived'
 
-  constructor(status: BoardStatusEnum) {
+  private status: BoardStatusType
+
+  constructor(status: BoardStatusType) {
     this.status = status
   }
 
   isActive(): boolean {
-    return this.status === BoardStatusEnum.ACTIVE
+    return this.status === BoardStatus.ACTIVE_STATUS
   }
 
   isArchived(): boolean {
-    return this.status === BoardStatusEnum.ARCHIVED
+    return this.status === BoardStatus.ARCHIVED_STATUS
   }
 
-  getStatus(): string {
+  getStatus(): BoardStatusType {
     return this.status
   }
 }
