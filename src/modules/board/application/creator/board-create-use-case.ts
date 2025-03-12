@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common'
 
+import { BoardRepository } from '@/modules/board/domain/board-repository'
 import { IdGenerator } from '@/common/domain/identity/id-generator'
 
 import { type BoardCreatePayload } from '@/modules/board/application/creator/board-create-payload'
@@ -10,6 +11,7 @@ import { BoardResponse } from '@/modules/board/application/response/board-respon
 export class BoardCreateUseCase {
   constructor(
     @Inject(IdGenerator) private idGenerator: IdGenerator,
+    @Inject(BoardRepository) private boardRepo: BoardRepository
   ) {}
 
   async dispatch(
@@ -20,8 +22,7 @@ export class BoardCreateUseCase {
 
     const request = new BoardRequest(id, payload)
     const board = request.make()
-
-    // Save board to database
+    await this.boardRepo.save(board)
 
     const boardResponse = new BoardResponse(
       board.getId(),
