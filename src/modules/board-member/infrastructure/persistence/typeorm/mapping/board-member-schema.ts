@@ -8,8 +8,8 @@ export interface BoardMemberSchemaInterface {
   board: BoardSchemaInterface
   user: UserSchemaInterface
   role: 'owner' | 'editor' | 'viewer'
-  active: boolean
   isOwner: boolean
+  active: boolean
   createdAt: number
   updatedAt: number
 }
@@ -27,14 +27,14 @@ export const BoardMemberSchema = new EntitySchema<BoardMemberSchemaInterface>({
       type: String,
       length: 50,
     },
-    active: {
-      type: Boolean,
-      default: true
-    },
     isOwner: {
       name: 'is_owner',
       type: Boolean,
       default: false
+    },
+    active: {
+      type: Boolean,
+      default: true
     },
     createdAt: {
       name: 'created_at',
