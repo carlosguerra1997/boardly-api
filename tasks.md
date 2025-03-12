@@ -4,6 +4,7 @@
 ## Configurar Linter
 ## Configurar Husky.
 ## Añadir endpoint /healthcheck
+## Estructurar bien los datos devueltos por la API. (Respuestas robustas y flexibles)
 
 ## Autenticación pendientes:
   - Devolver el refreshToken en una cookie (IMPORTANTE). Actualmente se devuelve en 
