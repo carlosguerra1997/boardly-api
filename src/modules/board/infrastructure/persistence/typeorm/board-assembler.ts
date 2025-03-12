@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 
 import { Board } from '@/modules/board/domain/board'
 import { BoardAssembler as IBoardAssembler } from '@/modules/board/domain/board-assembler'
+import { BoardStatusType } from '@/modules/board/domain/board-status'
 
 import { BoardSchemaInterface } from '@/modules/board/infrastructure/persistence/typeorm/mapping/board-schema'
 
@@ -23,7 +24,7 @@ export class BoardAssembler implements IBoardAssembler<Board, BoardSchemaInterfa
       item.id,
       item.name,
       item.description,
-      item.status
+      item.status as BoardStatusType
     )
   }
 }
