@@ -1,6 +1,6 @@
 import { Entity } from '@/common/domain/identity/entity'
 
-import { BoardStatus, BoardStatusEnum } from '@/modules/board/domain/board-status'
+import { BoardStatus, BoardStatusType } from '@/modules/board/domain/board-status'
 
 export class Board extends Entity {
   private name: string
@@ -11,7 +11,7 @@ export class Board extends Entity {
     id: string,
     name: string,
     description: string,
-    status: BoardStatusEnum = BoardStatusEnum.ACTIVE
+    status: BoardStatusType = 'active'
   ) {
     super(id)
 
