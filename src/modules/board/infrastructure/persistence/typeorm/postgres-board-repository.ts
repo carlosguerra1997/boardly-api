@@ -15,7 +15,7 @@ export class PostgresBoardRepository
   implements BoardRepository
 {
   constructor (
-    @Inject() boardAssembler: BoardAssembler<Board, BoardSchemaInterface>,
+    @Inject(BoardAssembler) boardAssembler: BoardAssembler<Board, BoardSchemaInterface>,
     @InjectRepository(BoardSchema) boardRepository: Repository<BoardSchemaInterface>
   ) {
     super(boardAssembler, boardRepository)
