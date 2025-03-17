@@ -14,7 +14,7 @@ export interface BoardMemberSchemaInterface {
   updatedAt: number
 }
 
-export const BoardMemberSchema = new EntitySchema<BoardMemberSchemaInterface>({
+/* export const BoardMemberSchema = new EntitySchema<BoardMemberSchemaInterface>({
   name: 'BoardMember',
   tableName: 'board_members',
   columns: {
@@ -61,4 +61,4 @@ export const BoardMemberSchema = new EntitySchema<BoardMemberSchemaInterface>({
       }
     }
   }
-})
+}) */
