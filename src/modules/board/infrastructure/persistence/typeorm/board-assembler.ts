@@ -9,10 +9,12 @@ import { BoardSchemaInterface } from '@/modules/board/infrastructure/persistence
 @Injectable()
 export class BoardAssembler implements IBoardAssembler<Board, BoardSchemaInterface> {
   toDatabase(item: Board): BoardSchemaInterface {
+    const description = item.getDescription() ?? null
+
     return {
       id: item.getId(),
       name: item.getName(),
-      description: item.getDescription(),
+      description: description,
       status: item.getStatus().getStatus(),
       createdAt: item.getCreatedAt(),
       updatedAt: item.getUpdatedAt()
@@ -20,11 +22,14 @@ export class BoardAssembler implements IBoardAssembler<Board, BoardSchemaInterfa
   }
 
   toEntity(item: BoardSchemaInterface): Board {
+    const description = item.description ?? ''
+
     return new Board(
       item.id,
       item.name,
-      item.description,
-      item.status as BoardStatusType
+      description,
+      item.status as BoardStatusType,
+      item.createdAt
     )
   }
 }
