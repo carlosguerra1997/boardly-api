@@ -1,4 +1,4 @@
-import { Body, Controller, InternalServerErrorException, NotFoundException, Post, Req, UseGuards } from '@nestjs/common'
+import { Body, Controller, HttpCode, HttpStatus, InternalServerErrorException, NotFoundException, Post, Req, UseGuards } from '@nestjs/common'
 import { type Request } from 'express'
 
 import { NotFoundError } from '@/common/domain/identity/exception/not-found-error'
@@ -8,7 +8,7 @@ import { ValidateWith } from '@/common/infrastructure/decorators/validate-with.d
 import { JwtAccessTokenGuard } from '@/modules/auth/infrastructure/guard/jwt-access-token.guard'
 
 import { BoardCreateUseCase } from '@/modules/board/application/creator/board-create-use-case'
-import { type BoardCreatePayload, boardPayloadValidationSchema } from '@/modules/board/application/creator/board-create-payload'
+import { type BoardCreatePayload, boardCreatePayloadValidationSchema } from '@/modules/board/application/creator/board-create-payload'
 import { BoardReadView } from '@/modules/board/presentation/board-read-view'
 import { UserResponse } from '@/modules/user/application/response/user-response'
 
@@ -20,14 +20,16 @@ export class BoardCreateController {
   ) {}
 
   @Post('board')
-  @ValidateWith(boardPayloadValidationSchema)
+  @HttpCode(HttpStatus.CREATED)
+  @ValidateWith(boardCreatePayloadValidationSchema)
   @UseGuards(JwtAccessTokenGuard)
   async invoke(
     @Body() body: BoardCreatePayload, 
     @Req() req: Request
   ): Promise<Result> {
+    const user = req?.user as UserResponse
+
     try {
-      const user = req?.user as UserResponse
       const board = await this.creator.dispatch(body, user.id)
       const result = new BoardReadView(board)
       return result      
