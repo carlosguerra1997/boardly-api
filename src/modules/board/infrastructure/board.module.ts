@@ -8,7 +8,10 @@ import { BoardAssembler as IBoardAssembler } from '@/modules/board/domain/board-
 import { BoardRepository } from '@/modules/board/domain/board-repository'
 
 import { BoardCreateController } from '@/modules/board/infrastructure/controllers/v1/board-create.controller'
+import { BoardUpdateController } from '@/modules/board/infrastructure/controllers/v1/board-update.controller'
+
 import { BoardCreateUseCase } from '@/modules/board/application/creator/board-create-use-case'
+import { BoardUpdateUseCase } from '@/modules/board/application/updater/board-update-use-case'
 
 import { BoardAssembler } from '@/modules/board/infrastructure/persistence/typeorm/board-assembler'
 import { BoardSchema } from '@/modules/board/infrastructure/persistence/typeorm/mapping/board-schema'
@@ -22,10 +25,12 @@ import { PostgresBoardRepository } from '@/modules/board/infrastructure/persiste
     TypeOrmModule.forFeature([ BoardSchema ])
   ],
   controllers: [
-    BoardCreateController
+    BoardCreateController,
+    BoardUpdateController
   ],
   providers: [
     BoardCreateUseCase,
+    BoardUpdateUseCase,
     { provide: IBoardAssembler, useClass: BoardAssembler },
     { provide: BoardRepository, useClass: PostgresBoardRepository }
   ]
