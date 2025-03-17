@@ -11,13 +11,33 @@ export class Board extends Entity {
     id: string,
     name: string,
     description: string,
-    status: BoardStatusType = 'active'
+    status: BoardStatusType = 'active',
+    createdAt: number = Date.now()
   ) {
-    super(id)
+    super(id, createdAt)
 
     this.name = name
     this.description = description
     this.status = new BoardStatus(status)
+  }
+
+  public static create(
+    id: string,
+    name: string,
+    description: string
+  ) {
+    return new Board(id, name, description)
+  }
+
+  public update(
+    name: string,
+    description: string,
+    status: BoardStatusType
+  ) {
+    this.name = name
+    this.description = description
+    this.status = new BoardStatus(status)
+    this.setUpdatedAt(Date.now())
   }
 
   public getName(): string {
