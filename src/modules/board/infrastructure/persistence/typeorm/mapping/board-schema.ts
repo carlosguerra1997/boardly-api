@@ -5,9 +5,9 @@ import { BoardMemberSchemaInterface } from '@/modules/board-member/infrastructur
 export interface BoardSchemaInterface{
   id: string
   name: string
-  description: string
+  description: string | null
   status: string
-  members: BoardMemberSchemaInterface
+  // members: BoardMemberSchemaInterface
   createdAt: number
   updatedAt: number
 }
@@ -27,7 +27,8 @@ export const BoardSchema = new EntitySchema<BoardSchemaInterface>({
     },
     description: {
       type: String,
-      length: 255
+      length: 255,
+      nullable: true
     },
     status: {
       type: String,
