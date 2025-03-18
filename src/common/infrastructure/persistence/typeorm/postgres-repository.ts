@@ -31,7 +31,7 @@ export abstract class PostgresRepository<T, U extends ObjectLiteral> implements 
     return element
   }
 
-  async remove(element: T): Promise<T> {
-    return element
+  async remove(element: T): Promise<void> {
+    // 
   }
 }
