@@ -6,6 +6,8 @@
 ## Añadir endpoint /healthcheck
 ## Estructurar bien los datos devueltos por la API. (Respuestas robustas y flexibles)
 
+## Método setex de Redis está deprecated
+
 ## Autenticación pendientes:
   - Devolver el refreshToken en una cookie (IMPORTANTE). Actualmente se devuelve en 
     una respuesta JSON.
