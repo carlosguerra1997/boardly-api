@@ -1,5 +1,6 @@
-import { Body, Controller, InternalServerErrorException, Param, Put } from '@nestjs/common'
+import { Body, Controller, InternalServerErrorException, NotFoundException, Param, Put } from '@nestjs/common'
 
+import { NotFoundError } from '@/common/domain/identity/exception/not-found-error'
 import { Result } from '@/common/domain/identity/result'
 
 import { BoardUpdateUseCase } from '@/modules/board/application/updater/board-update-use-case'
@@ -21,6 +22,11 @@ export class BoardUpdateController {
 
       return Result.success()
     } catch (error) {
+      if (error instanceof NotFoundError) {
+        throw new NotFoundException(error.message)
+      }
+
+
       throw new InternalServerErrorException()
     }
   }

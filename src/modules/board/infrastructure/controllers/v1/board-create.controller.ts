@@ -1,17 +1,17 @@
-import { Body, Controller, HttpCode, HttpStatus, InternalServerErrorException, NotFoundException, Post, Req, UseGuards } from '@nestjs/common'
 import { type Request } from 'express'
+import { BadRequestException, Body, Controller, HttpCode, HttpStatus, InternalServerErrorException, Post, Req, UseGuards } from '@nestjs/common'
 
-import { NotFoundError } from '@/common/domain/identity/exception/not-found-error'
+import { BadRequestError } from '@/common/domain/identity/exception/bad-request-error'
 import { Result } from '@/common/domain/identity/result'
-import { ValidateWith } from '@/common/infrastructure/decorators/validate-with.decorator'
 
 import { JwtAccessTokenGuard } from '@/modules/auth/infrastructure/guard/jwt-access-token.guard'
+import { ValidateWith } from '@/common/infrastructure/decorators/validate-with.decorator'
 
 import { BoardCreateUseCase } from '@/modules/board/application/creator/board-create-use-case'
 import { type BoardCreatePayload, boardCreatePayloadValidationSchema } from '@/modules/board/application/creator/board-create-payload'
-import { BoardReadView } from '@/modules/board/presentation/board-read-view'
 import { UserResponse } from '@/modules/user/application/response/user-response'
 
+import { BoardReadView } from '@/modules/board/presentation/board-read-view'
 
 @Controller('v1')
 export class BoardCreateController {
@@ -34,8 +34,8 @@ export class BoardCreateController {
       const result = new BoardReadView(board)
       return result      
     } catch (error) {
-      if (error instanceof NotFoundError) {
-        throw new NotFoundException()
+      if (error instanceof BadRequestError) {
+        throw new BadRequestException(error.message)
       }
       
       throw new InternalServerErrorException()
