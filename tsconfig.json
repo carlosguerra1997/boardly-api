@@ -17,7 +17,8 @@
     "paths": {
       "@/config/*": ["config/*"],
       "@/common/*": ["src/common/*"],
-      "@/modules/*": ["src/modules/*"]
+      "@/modules/*": ["src/modules/*"],
+      "@/tests/*": ["tests/*"]
     }
   },
   "exclude": [
