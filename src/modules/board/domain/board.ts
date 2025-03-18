@@ -1,6 +1,7 @@
 import { Entity } from '@/common/domain/identity/entity'
 
 import { BoardStatus, BoardStatusType } from '@/modules/board/domain/board-status'
+import { BoardNameRequiredException } from '@/modules/board/domain/exception/board-name-required-exception'
 
 export class Board extends Entity {
   private name: string
@@ -15,6 +16,8 @@ export class Board extends Entity {
     createdAt: number = Date.now()
   ) {
     super(id, createdAt)
+
+    this.isValidNameOrFail(name)
 
     this.name = name
     this.description = description
@@ -38,6 +41,12 @@ export class Board extends Entity {
     this.description = description
     this.status = new BoardStatus(status)
     this.setUpdatedAt(Date.now())
+  }
+
+  private isValidNameOrFail(name: string): void {
+    if (!name || !name.trim().length) {
+      throw new BoardNameRequiredException()
+    }
   }
 
   public getName(): string {
