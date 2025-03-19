@@ -1,8 +1,8 @@
 export type BoardStatusType = 'active' | 'archived'
 
 export class BoardStatus {
-  private static readonly ACTIVE_STATUS = 'active'
-  private static readonly ARCHIVED_STATUS = 'archived'
+  private readonly ACTIVE_STATUS = 'active'
+  private readonly ARCHIVED_STATUS = 'archived'
 
   private status: BoardStatusType
 
@@ -11,11 +11,11 @@ export class BoardStatus {
   }
 
   isActive(): boolean {
-    return this.status === BoardStatus.ACTIVE_STATUS
+    return this.status === this.ACTIVE_STATUS
   }
 
   isArchived(): boolean {
-    return this.status === BoardStatus.ARCHIVED_STATUS
+    return this.status === this.ARCHIVED_STATUS
   }
 
   getStatus(): BoardStatusType {
