@@ -22,8 +22,6 @@ export class UserReadController {
       const result = new UserReadView(user)
       return result
     } catch (error) {
-      console.log('Pero aqui no entro')
-
       if (error instanceof NotFoundError) {
         throw new NotFoundException(error.message)
       }
