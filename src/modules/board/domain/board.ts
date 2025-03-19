@@ -1,17 +1,23 @@
 import { Entity } from '@/common/domain/identity/entity'
 
-import { BoardStatus, BoardStatusType } from '@/modules/board/domain/board-status'
+import { BoardInvalidVisibility } from '@/modules/board/domain/exception/board-invalid-visibility'
 import { BoardNameRequiredException } from '@/modules/board/domain/exception/board-name-required-exception'
+import { BoardStatus, BoardStatusType } from '@/modules/board/domain/board-status'
+import { BoardVisibility, BoardVisibilityType } from '@/modules/board/domain/board-visibility'
+
+
 
 export class Board extends Entity {
   private name: string
   private description: string
   private status: BoardStatus
+  private visibility: BoardVisibility
 
   constructor(
     id: string,
     name: string,
     description: string,
+    visibility: BoardVisibilityType,
     status: BoardStatusType = 'active',
     createdAt: number = Date.now()
   ) {
@@ -22,14 +28,16 @@ export class Board extends Entity {
     this.name = name
     this.description = description
     this.status = new BoardStatus(status)
+    this.visibility = new BoardVisibility(visibility)
   }
 
   public static create(
     id: string,
     name: string,
-    description: string
+    description: string,
+    visibility: BoardVisibilityType
   ) {
-    return new Board(id, name, description)
+    return new Board(id, name, description, visibility)
   }
 
   public update(
@@ -55,6 +63,10 @@ export class Board extends Entity {
 
   public getDescription(): string {
     return this.description
+  }
+
+  public getVisibility(): BoardVisibility {
+    return this.visibility
   }
 
   public getStatus(): BoardStatus {

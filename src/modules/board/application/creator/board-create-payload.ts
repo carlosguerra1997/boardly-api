@@ -6,7 +6,9 @@ export const boardCreatePayloadValidationSchema = z.object({
     .nonempty({ message: 'Name cannot be empty' }),
   description: z
     .string({ message: 'Description not valid' })
-    .optional()
+    .optional(),
+  visibility: z
+    .enum(['public', 'private'], { message: 'Board visibility should be either public or private' })
 })
 
 export type BoardCreatePayload = z.infer<typeof boardCreatePayloadValidationSchema>
