@@ -3,6 +3,7 @@ export class BoardResponse {
     public id: string,
     public name: string,
     public description: string,
-    public status: string
+    public status: string,
+    public visibility: string
   ) {}
 }
