@@ -33,7 +33,7 @@ describe('Board create controller test suite', () => {
     expect(repo.stored).not.toBeUndefined()
     expect(repo.stored?.getName()).toBe('Testing board')
     expect(repo.stored?.getDescription()).toBe('This is a testing board')
-    expect(repo.stored?.getStatus().getStatus()).toBe('active')
+    expect(repo.stored?.getStatus().getValue()).toBe('active')
   })
 
   it('Should return the created Board', async () => {
