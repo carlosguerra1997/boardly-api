@@ -26,8 +26,8 @@ export class ZodValidationPipe implements PipeTransform {
       }
       
       throw new InternalServerErrorException({
-        message: 'Message',
-        error: 'Error'
+        message: 'An unexpected error occurred',
+        code: 500
       })
     }
   }
