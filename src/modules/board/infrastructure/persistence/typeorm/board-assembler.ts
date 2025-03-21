@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common'
 
 import { Board } from '@/modules/board/domain/board'
 import { BoardAssembler as IBoardAssembler } from '@/modules/board/domain/board-assembler'
-import { BoardStatusType } from '@/modules/board/domain/board-status'
+import { BoardStatus, type BoardStatusType } from '@/modules/board/domain/board-status'
+import { BoardVisibility, type BoardVisibilityType } from '@/modules/board/domain/board-visibility'
 
 import { BoardSchemaInterface } from '@/modules/board/infrastructure/persistence/typeorm/mapping/board-schema'
 
@@ -15,7 +16,8 @@ export class BoardAssembler implements IBoardAssembler<Board, BoardSchemaInterfa
       id: item.getId(),
       name: item.getName(),
       description: description,
-      status: item.getStatus().getStatus(),
+      visibility: item.getVisibility().getValue(),
+      status: item.getStatus().getValue(),
       createdAt: item.getCreatedAt(),
       updatedAt: item.getUpdatedAt()
     }
@@ -23,12 +25,15 @@ export class BoardAssembler implements IBoardAssembler<Board, BoardSchemaInterfa
 
   toEntity(item: BoardSchemaInterface): Board {
     const description = item.description ?? ''
+    const status = new BoardStatus(item.status as BoardStatusType)
+    const visibility = new BoardVisibility(item.visibility as BoardVisibilityType)
 
     return new Board(
       item.id,
       item.name,
       description,
-      item.status as BoardStatusType,
+      visibility,
+      status,
       item.createdAt
     )
   }
