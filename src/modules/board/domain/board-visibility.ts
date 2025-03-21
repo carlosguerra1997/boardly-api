@@ -3,10 +3,10 @@ import { BoardInvalidVisibility } from '@/modules/board/domain/exception/board-i
 export type BoardVisibilityType = 'public' | 'private'
 
 export class BoardVisibility {
-  private readonly visibility: BoardVisibilityType
-
   private readonly PUBLIC_VISIBILITY = 'public'
   private readonly PRIVATE_VISIBILITY = 'private'
+
+  private visibility: BoardVisibilityType
 
   constructor(visibility: BoardVisibilityType) {
     this.isValidVisibility(visibility)
@@ -23,7 +23,7 @@ export class BoardVisibility {
     }
   }
 
-  public getVisibility(): BoardVisibilityType {
+  public getValue(): BoardVisibilityType {
     return this.visibility
   }
 

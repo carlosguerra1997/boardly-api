@@ -17,8 +17,8 @@ export class Board extends Entity {
     id: string,
     name: string,
     description: string,
-    visibility: BoardVisibilityType,
-    status: BoardStatusType = 'active',
+    visibility: BoardVisibility,
+    status: BoardStatus,
     createdAt: number = Date.now()
   ) {
     super(id, createdAt)
@@ -27,17 +27,24 @@ export class Board extends Entity {
 
     this.name = name
     this.description = description
-    this.status = new BoardStatus(status)
-    this.visibility = new BoardVisibility(visibility)
+    this.status = status
+    this.visibility = visibility
   }
 
   public static create(
     id: string,
     name: string,
     description: string,
-    visibility: BoardVisibilityType
+    visibility: BoardVisibility,
+    status: BoardStatus
   ) {
-    return new Board(id, name, description, visibility)
+    return new Board(
+      id, 
+      name, 
+      description, 
+      visibility,
+      status
+    )
   }
 
   public update(
