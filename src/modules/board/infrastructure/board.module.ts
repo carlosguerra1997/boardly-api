@@ -8,17 +8,18 @@ import { BoardAssembler as IBoardAssembler } from '@/modules/board/domain/board-
 import { BoardRepository } from '@/modules/board/domain/board-repository'
 
 import { BoardCreateController } from '@/modules/board/infrastructure/controllers/v1/board-create.controller'
+import { BoardListController } from '@/modules/board/infrastructure/controllers/v1/board-list.controller'
 import { BoardReadController } from '@/modules/board/infrastructure/controllers/v1/board-read.controller'
 import { BoardUpdateController } from '@/modules/board/infrastructure/controllers/v1/board-update.controller'
 
 import { BoardCreateUseCase } from '@/modules/board/application/creator/board-create-use-case'
+import { BoardListUseCase } from '@/modules/board/application/lister/board-list-use-case'
 import { BoardReadUseCase } from '@/modules/board/application/reader/board-read-use-case'
 import { BoardUpdateUseCase } from '@/modules/board/application/updater/board-update-use-case'
 
 import { BoardAssembler } from '@/modules/board/infrastructure/persistence/typeorm/board-assembler'
 import { BoardSchema } from '@/modules/board/infrastructure/persistence/typeorm/mapping/board-schema'
 import { PostgresBoardRepository } from '@/modules/board/infrastructure/persistence/typeorm/postgres-board-repository'
-
 
 @Module({
   imports: [
@@ -28,11 +29,13 @@ import { PostgresBoardRepository } from '@/modules/board/infrastructure/persiste
   ],
   controllers: [
     BoardCreateController,
+    BoardListController,
     BoardReadController,
     BoardUpdateController
   ],
   providers: [
     BoardCreateUseCase,
+    BoardListUseCase,
     BoardReadUseCase,
     BoardUpdateUseCase,
     { provide: IBoardAssembler, useClass: BoardAssembler },
