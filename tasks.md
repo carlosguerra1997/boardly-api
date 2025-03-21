@@ -5,6 +5,7 @@
 ## Configurar Husky.
 ## Añadir endpoint /healthcheck
 ## Estructurar bien los datos devueltos por la API. (Respuestas robustas y flexibles)
+## Implementar patrón collection para trabajar con listas.
 
 ## Método setex de Redis está deprecated
 
