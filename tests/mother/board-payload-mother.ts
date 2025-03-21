@@ -5,6 +5,7 @@ export class BoardPayloadMother {
     return {
       name: 'Testing board',
       description: 'This is a testing board',
+      visibility: 'private',
       ...overrides
     }
   }
