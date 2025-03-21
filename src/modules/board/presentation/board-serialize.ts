@@ -4,6 +4,7 @@ interface BoardItemReadView {
   id: string
   name: string
   description: string
+  visibility: string
   status: string
 }
 
@@ -12,6 +13,7 @@ export const boardSerialize = (item: BoardResponse): BoardItemReadView =>  {
     id: item.id,
     name: item.name,
     description: item.description,
+    visibility: item.visibility,
     status: item.status
   }
 }
