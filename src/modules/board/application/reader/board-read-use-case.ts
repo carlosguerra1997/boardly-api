@@ -21,7 +21,8 @@ export class BoardReadUseCase {
       board.getId(),
       board.getName(),
       board.getDescription(),
-      board.getStatus().getStatus()
+      board.getVisibility().getValue(),
+      board.getStatus().getValue()
     )
 
     return boardResponse
