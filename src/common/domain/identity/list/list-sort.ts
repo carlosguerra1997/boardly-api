@@ -2,19 +2,36 @@ export class ListSort {
   private readonly asc = 'asc'
   private readonly desc = 'desc'
 
+  public name: string
   public order: string
 
-  constructor(public name: string) {
-    this.order = this.asc
+  constructor(
+    name: string,
+    order: string
+  ) {
+    this.name = name
+    this.order = this.isValidOrder(order) ? order.toLowerCase() : this.asc
   }
 
-  public sortAsc(): ListSort {
-    this.order = this.asc
-    return this
+  public static parse(value: string): ListSort {
+    const [
+      name, 
+      order
+    ] = value.split(/[;:]/)
+
+    return new  ListSort(name, order)
   }
 
-  public sortDesc(): ListSort {
-    this.order = this.desc
-    return this
+  public static desc(name: string): ListSort {
+    return new ListSort(name, 'desc')
+  }
+
+  public isValid(): boolean {
+    return this.name !== ''
+  }
+
+  private isValidOrder(order: string): boolean {
+    const orderToLower = order.toLocaleLowerCase()
+    return orderToLower === this.asc || orderToLower === this.desc
   }
 }
