@@ -1,20 +1,20 @@
 import { Board } from '@/modules/board/domain/board'
-import { BoardStatus } from '@/modules/board/domain/board-status'
+import { BoardStatus, BoardStatusType } from '@/modules/board/domain/board-status'
 import { BoardVisibility } from '@/modules/board/domain/board-visibility'
 
 export const getBoardFixtures = (): Board[] => {
-  const boards: Board[] = []
-
   const visibility = getBoardVisibilityFixture()
-  const status = getBoardStatusFixture()
+
+  const activeStatus = getBoardStatusFixture()
+  const archivedStatus = getBoardStatusFixture('archived')
 
   const boardOne = new Board(
     'board-id-1',
     'Testing board 1',
     'This is a description for testing board 1',
     visibility,
-    status,
-    1742384328
+    activeStatus,
+    Date.now()
   )
 
   const boardTwo = new Board(
@@ -22,20 +22,17 @@ export const getBoardFixtures = (): Board[] => {
     'Testing board 2',
     '',
     visibility,
-    status,
-    1724374253
+    archivedStatus,
+    new Date('2025-01-01').getTime()
   )
 
-  boards.push(boardOne)
-  boards.push(boardTwo)
-
-  return boards
+  return [ boardOne, boardTwo ]
 }
 
 const getBoardVisibilityFixture = (): BoardVisibility => {
   return new BoardVisibility('private')
 }
 
-const getBoardStatusFixture = (): BoardStatus => {
-  return new BoardStatus('active')
+const getBoardStatusFixture = (status: BoardStatusType = 'active'): BoardStatus => {
+  return new BoardStatus(status)
 }
