@@ -6,6 +6,7 @@
 ## Añadir endpoint /healthcheck
 ## Estructurar bien los datos devueltos por la API. (Respuestas robustas y flexibles)
 ## Implementar patrón collection para trabajar con listas.
+## Arreglar ListQuery al crear un new ListFilter, siempre se le pasa FilterType.LIKE (ej: en status y visibility de Board debería ser EQUAL).
 
 ## Método setex de Redis está deprecated
 
@@ -19,5 +20,4 @@
   - Añadir blacklist de refresh tokens a redis (blacklistear el refreshToken si el usuario cierra sesión).
   - Login con Google o Github.
 
-## Aplicar CQRS
 ## CI/CD
