@@ -7,7 +7,6 @@ import { BoardStatus } from '@/modules/board/domain/board-status'
 import { BoardVisibility } from '@/modules/board/domain/board-visibility'
 
 import { type BoardCreatePayload } from '@/modules/board/application/creator/board-create-payload'
-import { BoardResponse } from '@/modules/board/application/response/board-response'
 
 @Injectable()
 export class BoardCreateUseCase {
@@ -19,7 +18,7 @@ export class BoardCreateUseCase {
   async dispatch(
     payload: BoardCreatePayload, 
     userId: string
-  ): Promise<BoardResponse> {
+  ): Promise<Board> {
     const { name, description, visibility } = payload
     const id = await this.idGenerator.generate()
 
@@ -32,15 +31,6 @@ export class BoardCreateUseCase {
     )
     
     await this.boardRepo.save(board)
-
-    const boardResponse = new BoardResponse(
-      board.getId(),
-      board.getName(),
-      board.getDescription(),
-      board.getStatus().getValue(),
-      board.getVisibility().getValue()
-    )
-
-    return boardResponse
+    return board
   }
 }

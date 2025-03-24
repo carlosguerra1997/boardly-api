@@ -12,8 +12,8 @@ export class BoardListController {
     private lister: BoardListUseCase
   ) {}
 
-  @Get('board')
-  async getBoardList(@Query() query: BoardQueryPayload): Promise<Result> {
+  @Get('boards')
+  async invoke(@Query() query: BoardQueryPayload): Promise<Result> {
     try {
       const response = await this.lister.dispatch(query)
       const result = new BoardListView(response)
