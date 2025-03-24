@@ -1,4 +1,4 @@
-import { BoardResponse } from '@/modules/board/application/response/board-response'
+import { Board } from '@/modules/board/domain/board'
 
 interface BoardItemReadView {
   id: string
@@ -8,12 +8,12 @@ interface BoardItemReadView {
   status: string
 }
 
-export const boardSerialize = (item: BoardResponse): BoardItemReadView =>  {
+export const boardSerialize = (item: Board): BoardItemReadView =>  {
   return {
-    id: item.id,
-    name: item.name,
-    description: item.description,
-    visibility: item.visibility,
-    status: item.status
+    id: item.getId(),
+    name: item.getName(),
+    description: item.getDescription(),
+    visibility: item.getVisibility().getValue(),
+    status: item.getStatus().getValue()
   }
 }

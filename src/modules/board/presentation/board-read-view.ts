@@ -1,10 +1,11 @@
 import { Result } from '@/common/domain/identity/result'
 
-import { BoardResponse } from '@/modules/board/application/response/board-response'
+import { Board } from '@/modules/board/domain/board'
+
 import { boardSerialize } from '@/modules/board/presentation/board-serialize'
 
 export class BoardReadView extends Result {
-  constructor(board: BoardResponse) {
+  constructor(board: Board) {
     super(Result.successMessage)
     this.data = boardSerialize(board)
   }
