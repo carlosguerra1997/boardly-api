@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common'
 
+import { Board } from '@/modules/board/domain/board'
 import { BoardRepository } from '@/modules/board/domain/board-repository'
 
-import { BoardResponse } from '@/modules/board/application/response/board-response'
 import { type BoardQueryPayload } from '@/modules/board/application/lister/board-query-payload'
 import { ListQuery } from '@/common/domain/identity/list/list-query'
 
@@ -17,8 +17,9 @@ export class BoardListUseCase {
     @Inject(BoardRepository) private boardRepo: BoardRepository
   ) {}
 
-  async dispatch(payload: BoardQueryPayload): Promise<BoardResponse[]> {
+  async dispatch(payload: BoardQueryPayload): Promise<Board[]> {
     const query = ListQuery.parse(payload, this.mapping)
-    return []
+    const boards = await this.boardRepo.obtainByQuery(query)
+    return boards
   }
 }
