@@ -1,14 +1,18 @@
 import { z } from 'zod'
 
-export const boardCreatePayloadValidationSchema = z.object({
+export const boardCreatePayloadSchema = z.object({
   name: z
-    .string({ message: 'Name not valid' })
-    .nonempty({ message: 'Name cannot be empty' }),
+    .string()
+    .min(1),
   description: z
-    .string({ message: 'Description not valid' })
+    .string()
     .optional(),
   visibility: z
     .enum(['public', 'private'], { message: 'Board visibility should be either public or private' })
 })
 
-export type BoardCreatePayload = z.infer<typeof boardCreatePayloadValidationSchema>
+const _boardCreatePayloadType = boardCreatePayloadSchema.shape
+
+export type BoardCreatePayload = {
+  [K in keyof typeof _boardCreatePayloadType]: z.infer<typeof _boardCreatePayloadType[K]>
+}
