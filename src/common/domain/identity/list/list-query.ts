@@ -7,7 +7,7 @@ const DEFAULT_PAGE = 1
 const DEFAULT_PAGE_LIMIT = 20
 const DEFAULT_SORT_PARAM = 'createdAt'
 
-type QueryParams = Record<string, any> & ListQueryPayload
+export type QueryParams = Record<string, any> & ListQueryPayload
 
 export class ListQuery {
   public filters: Map<string, ListFilter>
@@ -71,7 +71,7 @@ export class ListQuery {
       })
   }
 
-  private add(field: ListFilter | ListSort): void {
+  public add(field: ListFilter | ListSort): void {
     if (field instanceof ListFilter) {
       if (field.isValid()) {
         this.filters.set(field.name, field)
@@ -85,7 +85,7 @@ export class ListQuery {
     }
   }
 
-  private sortByDefault(): void {
+  public sortByDefault(): void {
     if (this.hasSort()) {
       return
     }
