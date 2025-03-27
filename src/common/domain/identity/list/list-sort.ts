@@ -7,10 +7,10 @@ export class ListSort {
 
   constructor(
     name: string,
-    order: string
+    order: string = this.desc
   ) {
     this.name = name
-    this.order = this.isValidOrder(order) ? order.toLowerCase() : this.asc
+    this.order = this.isValidOrder(order) ? order.toLowerCase() : this.desc
   }
 
   public static parse(value: string): ListSort {
@@ -31,7 +31,7 @@ export class ListSort {
   }
 
   private isValidOrder(order: string): boolean {
-    const orderToLower = order.toLocaleLowerCase()
+    const orderToLower = order.toLowerCase()
     return orderToLower === this.asc || orderToLower === this.desc
   }
 }
