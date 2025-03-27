@@ -13,4 +13,8 @@ export class BoardPayloadMother {
   static withEmptyName(): BoardCreatePayload {
     return this.create({ name: '' })
   }
+
+  static withoutDescription(): BoardCreatePayload {
+    return this.create({ description: undefined })
+  }
 }
