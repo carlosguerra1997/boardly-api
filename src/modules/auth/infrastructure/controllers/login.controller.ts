@@ -1,12 +1,11 @@
 import { Controller, Post, Body, InternalServerErrorException, BadRequestException } from '@nestjs/common'
 
 import { BadRequestError } from '@/common/domain/identity/exception/bad-request-error'
-import { Result } from '@/common/domain/identity/result'
-
-import { type LoginPayload, loginPayloadSchema } from '@/modules/auth/application/login/login-payload'
 import { ValidateWith } from '@/common/infrastructure/decorators/validate-with.decorator'
+import { Result } from '@/common/presentation/result'
 
 import { LoginUseCase } from '@/modules/auth/application/login/login-use-case'
+import { type LoginPayload, loginPayloadSchema } from '@/modules/auth/application/login/login-payload'
 
 @Controller()
 export class LoginController {

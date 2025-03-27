@@ -1,11 +1,11 @@
 import { Controller, Post, UseGuards, Req, UnauthorizedException, Inject, InternalServerErrorException } from '@nestjs/common'
 
 import { UnauthorizedError } from '@/common/domain/identity/exception/unauthorized-error'
+import { Result } from '@/common/presentation/result'
 
 import { RefreshUserCase } from '@/modules/auth/application/refresh/refresh-use-case'
 
 import { JwtRefreshTokenGuard } from '@/modules/auth/infrastructure/guard/jwt-refresh-token.guard'
-import { Result } from '@/common/domain/identity/result'
 
 @Controller()
 export class RefreshController {

@@ -1,7 +1,7 @@
 import { Controller, Get, InternalServerErrorException, NotFoundException, Param, UseGuards } from '@nestjs/common'
 
 import { NotFoundError } from '@/common/domain/identity/exception/not-found-error'
-import { Result } from '@/common/domain/identity/result'
+import { Result } from '@/common/presentation/result'
 
 import { JwtAccessTokenGuard } from '@/modules/auth/infrastructure/guard/jwt-access-token.guard'
 

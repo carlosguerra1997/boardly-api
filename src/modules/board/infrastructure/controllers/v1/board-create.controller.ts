@@ -2,13 +2,13 @@ import { type Request } from 'express'
 import { BadRequestException, Body, Controller, HttpCode, HttpStatus, InternalServerErrorException, Post, Req, UseGuards } from '@nestjs/common'
 
 import { BadRequestError } from '@/common/domain/identity/exception/bad-request-error'
-import { Result } from '@/common/domain/identity/result'
+import { Result } from '@/common/presentation/result'
 
 import { JwtAccessTokenGuard } from '@/modules/auth/infrastructure/guard/jwt-access-token.guard'
 import { ValidateWith } from '@/common/infrastructure/decorators/validate-with.decorator'
 
 import { BoardCreateUseCase } from '@/modules/board/application/creator/board-create-use-case'
-import { type BoardCreatePayload, boardCreatePayloadValidationSchema } from '@/modules/board/application/creator/board-create-payload'
+import { type BoardCreatePayload, boardCreateValidationPayloadSchema } from '@/modules/board/application/creator/board-create-payload'
 import { UserResponse } from '@/modules/user/application/response/user-response'
 
 import { BoardReadView } from '@/modules/board/presentation/board-read-view'
@@ -21,7 +21,7 @@ export class BoardCreateController {
 
   @Post('board')
   @HttpCode(HttpStatus.CREATED)
-  @ValidateWith(boardCreatePayloadValidationSchema)
+  @ValidateWith(boardCreateValidationPayloadSchema)
   @UseGuards(JwtAccessTokenGuard)
   async invoke(
     @Body() body: BoardCreatePayload, 

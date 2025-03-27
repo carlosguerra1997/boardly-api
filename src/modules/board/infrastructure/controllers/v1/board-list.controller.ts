@@ -1,6 +1,6 @@
 import { Controller, Get, InternalServerErrorException, Query } from '@nestjs/common'
 
-import { Result } from '@/common/domain/identity/result'
+import { Result } from '@/common/presentation/result'
 
 import { BoardListUseCase } from '@/modules/board/application/lister/board-list-use-case'
 import { type BoardQueryPayload } from '@/modules/board/application/lister/board-query-payload'
