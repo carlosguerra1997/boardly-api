@@ -1,4 +1,4 @@
-import { Result } from '@/common/domain/identity/result'
+import { Result } from '@/common/presentation/result'
 
 import { UserResponse } from '@/modules/user/application/response/user-response'
 import { userSerialize } from '@/modules/user/presentation/v1/user-serialize'

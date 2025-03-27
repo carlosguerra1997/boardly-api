@@ -1,7 +1,6 @@
-import { Result } from '@/common/domain/identity/result'
+import { Result } from '@/common/presentation/result'
 
 import { Board } from '@/modules/board/domain/board'
-
 import { boardSerialize } from '@/modules/board/presentation/board-serialize'
 
 export class BoardReadView extends Result {
