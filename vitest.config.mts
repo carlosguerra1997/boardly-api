@@ -8,7 +8,8 @@ const vitestConfig = defineVitestConfig({
     environment: 'node',
     coverage: {
       provider: 'v8',
-      reporter: ['html', 'json', 'test']
+      reporter: ['html', 'json', 'text'],
+      exclude: ['node_modules', 'tests/**', 'dist/**'],
     }
   }
 })
