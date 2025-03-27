@@ -1,7 +1,11 @@
 export class DataTransform {
-  public toString(value: any, defaultValue: string = ''): string | null {
+  public toString(value: any, defaultValue: string | null = ''): string | null {
     if (this.isNull(value)) {
-      return null
+      if (this.isNull(defaultValue)) {
+        return null
+      }
+
+      return defaultValue
     }
 
     if (this.isUndefined(value)) {
@@ -15,6 +19,10 @@ export class DataTransform {
     if (this.isNull(value) || this.isUndefined(value)) {
       return defaultValue
     }
+
+    if (this.isBoolean(value)) {
+      return value ? 1 : 0
+    }
  
     const numberValue = parseInt(value)
     if (isNaN(numberValue)) {
@@ -24,21 +32,16 @@ export class DataTransform {
     return numberValue
   }
 
-  public isEmpty(value: string | null | []): boolean {
+  public isEmpty(value: string | null): boolean {
     if (value === null) {
       return true
-    }
-
-    if (this.isArray(value)) {
-      return value.length > 0
     }
 
     return !value
   }
 
-
-  private isArray(value: any): boolean {
-    return Array.isArray(value)
+  private isBoolean(value: any): boolean {
+    return typeof value === 'boolean'
   }
 
   private isNull(value: any): boolean {
