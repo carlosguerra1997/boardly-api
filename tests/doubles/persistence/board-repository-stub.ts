@@ -3,21 +3,17 @@ import { ListRepositoryStub } from '@/tests/doubles/persistence/common/list-repo
 import { Board } from '@/modules/board/domain/board'
 import { BoardRepository } from '@/modules/board/domain/board-repository'
 
-import { IdGeneratorStub } from '@/tests/doubles/common/id-generator-stub'
 import { getBoardFixtures } from '@/tests/fixtures/board-fixture'
 
 export class BoardRepositoryStub
   extends ListRepositoryStub<Board>
   implements BoardRepository
 {
-  public static readonly BOARD_ID = 'board-id'
-
-  public idGenerator: IdGeneratorStub
+  public static readonly BOARD_ID_1 = 'board-id-1'
+  public static readonly BOARD_ID_2 = 'board-id-2'
 
   constructor() {
     super()
-
-    this.idGenerator = new IdGeneratorStub()
     this.makeData(getBoardFixtures())
   }
 
